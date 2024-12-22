@@ -359,7 +359,8 @@ border: 1px solid rgba(12, 145, 82, 0.02);
 /* Popup Content */
 .popup-content {
   background: rgba(9, 48, 40, 0.59);
-  width: 50%;
+  width: 40%;
+  height: 85%;
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(7.3px);
@@ -677,6 +678,7 @@ body.popup-open {
     }
     #footer-left p{
       font-size: 10px;
+      width: 80%;
     }
     #footer-right{
       width: 100%;
@@ -719,7 +721,8 @@ body.popup-open {
   /* Popup Content */
   .popup-content {
     background: rgba(9, 48, 40, 0.59);
-    width: 80%; /* Full width for small screens */
+    width: 80%;
+    height: 80%; /* Full width for small screens */
     max-width: 400px; /* Limit width on larger phones */
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -737,7 +740,7 @@ body.popup-open {
 
   .popup-content img {
     width: 100%; /* Full width for images on mobile */
-    height: auto; /* Maintain aspect ratio */
+     height: 50%;/* Maintain aspect ratio */
     max-height: 500px; /* Limit height for smaller screens */
     margin-bottom: 15px; /* Adjust margin for compact design */
   }
