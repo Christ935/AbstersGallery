@@ -9,15 +9,15 @@ function Body({ isRandomized, triggerRandomize }) {
   const [popupImage, setPopupImage] = useState(null);
   const [loading, setLoading] = useState(true);
   const [shuffledMemes, setShuffledMemes] = useState([]);
+  const [isDownloading, setIsDownloading] = useState(false); // Track download status
   const itemsPerPage = 12;
 
   const randomizeMemes = () => {
-    const shuffled = [...filteredMemes].sort(() => Math.random() - 0.5).slice(0,12);
+    const shuffled = [...filteredMemes].sort(() => Math.random() - 0.5).slice(0, 12);
     setShuffledMemes(shuffled);
   };
 
   useEffect(() => {
-   
     if (isRandomized) {
       setCurrentPage(1);
       randomizeMemes();
@@ -39,15 +39,17 @@ function Body({ isRandomized, triggerRandomize }) {
   const closePopup = () => {
     setPopupImage(null);
   };
+
   const downloadImage = async (url, filename) => {
+    setIsDownloading(true); // Disable button and set "Downloading..."
     try {
-      const proxyUrl = `http://localhost:4000/proxy?url=${encodeURIComponent(url)}`;
+      const proxyUrl = `https://abstersgallery.onrender.com/proxy?url=${encodeURIComponent(url)}`;
       const response = await fetch(proxyUrl);
       if (!response.ok) {
         throw new Error("Failed to fetch the image");
       }
       const blob = await response.blob();
-  
+
       const blobUrl = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = blobUrl;
@@ -55,10 +57,12 @@ function Body({ isRandomized, triggerRandomize }) {
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-  
+
       window.URL.revokeObjectURL(blobUrl);
     } catch (error) {
       console.error("Error downloading image:", error);
+    } finally {
+      setIsDownloading(false); // Re-enable button after download
     }
   };
 
@@ -75,17 +79,15 @@ function Body({ isRandomized, triggerRandomize }) {
       document.getElementById("body").scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
   };
-  
+
   const goToPreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prev) => prev - 1);
-      
     }
     setTimeout(() => {
       document.getElementById("body").scrollIntoView({ behavior: "smooth", block: "start" });
     }, 100);
-    };
-  
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -150,13 +152,16 @@ function Body({ isRandomized, triggerRandomize }) {
                   <button className="header-left-btn2" onClick={closePopup}>
                     Close
                   </button>
-                 
-                    <button  onClick={() =>
+
+                  <button
+                    onClick={() =>
                       downloadImage(popupImage.picture, `${popupImage.title}.jpg`)
-                    } className="header-left-btn">
-                      Download <FaDownload id="arrowfa" />
-                    </button>
-                  
+                    }
+                    className="header-left-btn"
+                    disabled={isDownloading} // Disable button while downloading
+                  >
+                    {isDownloading ? "Downloading..." : <>Download <FaDownload id="arrowfa" /></>}
+                  </button>
                 </div>
               </div>
             </div>

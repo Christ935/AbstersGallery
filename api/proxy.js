@@ -12,27 +12,27 @@ const handler = async (req, res) => {
 
   const { url } = req.query;
 
-  // Validate the URL
+  
   if (!url) {
     return res.status(400).json({ error: "URL is required" });
   }
 
   try {
-    // Dynamically import node-fetch for compatibility
+    
     const fetch = (await import("node-fetch")).default;
 
-    // Fetch the resource from Firebase
+    
     const response = await fetch(url);
 
-    // Check for a successful response
+   
     if (!response.ok) {
       return res.status(response.status).json({ error: "Failed to fetch the resource" });
     }
 
-    // Get the content type of the resource
+ 
     const contentType = response.headers.get("Content-Type");
 
-    // Convert the response body to a buffer and send it back
+    
     const buffer = await response.buffer();
     res.setHeader("Content-Type", contentType);
     res.send(buffer);
@@ -42,7 +42,6 @@ const handler = async (req, res) => {
   }
 };
 
-// Bind the handler to the /proxy route
 app.get("/proxy", handler);
 
 // Use Render's PORT environment variable or default to port 4000
