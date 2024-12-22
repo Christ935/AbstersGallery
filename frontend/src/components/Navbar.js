@@ -21,7 +21,7 @@ function Navbar({ toggleRandomize, cancelRandomize, isRandomized }) {
           <FaSearch className="search-icon" />
           <input
             type="text"
-            placeholder="Search for item"
+            placeholder="Search"
             onChange={handleSearch}
           />
         </div>
