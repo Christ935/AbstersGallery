@@ -41,7 +41,7 @@ function Body({ isRandomized, triggerRandomize }) {
   };
   const downloadImage = async (url, filename) => {
     try {
-      const proxyUrl = `http://localhost:4000/proxy?url=${encodeURIComponent(url)}`;
+      const proxyUrl = `https://absters-gallery-xph9.vercel.app/proxy?url=${encodeURIComponent(url)}`;
       const response = await fetch(proxyUrl);
       if (!response.ok) {
         throw new Error("Failed to fetch the image");
