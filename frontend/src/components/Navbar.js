@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "./Images/Logo.png";
-import { FaRandom, FaSearch, FaTimes } from "react-icons/fa";
+import {  FaRandom, FaSearch, FaTimes } from "react-icons/fa";
 import { useMemes } from "./MemeProvider";
 
 function Navbar({ toggleRandomize, cancelRandomize, isRandomized }) {
@@ -37,6 +37,7 @@ function Navbar({ toggleRandomize, cancelRandomize, isRandomized }) {
             <FaTimes onClick={cancelRandomize} id="faicon" />
   
         )}
+        
       </div>
     </div>
   );

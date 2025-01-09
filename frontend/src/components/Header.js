@@ -1,7 +1,10 @@
 import React from "react";
-import { FaArrowRight, FaUser } from "react-icons/fa";
+import { FaArrowRight, FaDice, FaUser } from "react-icons/fa";
 import penguheader from "./Images/pengurocket.jpg";
 function Header({onExplore, onAbout}) {
+    const handlePlayWithAbster = () => {
+        window.open("https://play-with-abster.vercel.app/", "_blank");
+    };
     return (
         <div id="header">
             <div id="header-left">
@@ -11,6 +14,9 @@ function Header({onExplore, onAbout}) {
                 <button className="header-left-btn" onClick={onExplore}>Explore <FaArrowRight id="arrowfa"/></button>
                 <button onClick={onAbout} className="header-left-btn2">About Us <FaUser id="arrowfa"/></button>
 
+            </div>
+            <div>
+                <button className="header-left-btn3" onClick={handlePlayWithAbster}>Play With Abster <FaDice id="arrowfa"/></button>
             </div>
         </div>
         <div id="header-right">
